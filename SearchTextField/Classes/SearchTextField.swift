@@ -663,20 +663,24 @@ open class SearchTextFieldItem<T> {
     public var title: String
     public var subtitle: String?
     public var image: UIImage?
+    public var any: T?
 
-    public init(title: String, subtitle: String?, image: UIImage?) {
+    public init(title: String, subtitle: String?, image: UIImage?, _ any: T? = nil) {
         self.title = title
         self.subtitle = subtitle
         self.image = image
+        self.any = any
     }
 
-    public init(title: String, subtitle: String?) {
+    public init(title: String, subtitle: String?, _ any: T? = nil) {
         self.title = title
         self.subtitle = subtitle
+        self.any = any
     }
 
-    public init(title: String) {
+    public init(title: String, _ any: T? = nil) {
         self.title = title
+        self.any = any
     }
 }
 
