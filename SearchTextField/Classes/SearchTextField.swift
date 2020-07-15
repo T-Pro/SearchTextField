@@ -151,11 +151,13 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
     fileprivate var filteredResults = [SearchTextFieldItem<T>]()
     fileprivate var filterDataSource = [SearchTextFieldItem<T>]() {
         didSet {
-            filter(forceShowAll: forceNoFiltering)
-            buildSearchTableView()
+            if startVisible {
+                filter(forceShowAll: forceNoFiltering)
+                buildSearchTableView()
 
-            if startVisibleWithoutInteraction {
-                textFieldDidChange()
+                if startVisibleWithoutInteraction {
+                    textFieldDidChange()
+                }
             }
         }
     }
@@ -268,6 +270,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
 
     // Re-set frames and theme colors
     fileprivate func redrawSearchTableView() {
+        
         if inlineMode {
             tableView?.isHidden = true
             return
