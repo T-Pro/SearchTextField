@@ -28,7 +28,10 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
 
     open var suggestionsPresented: Bool {
           get {
-              return self.tableView?.superview != nil
+              guard let tableView: UITableView = self.tableView else {
+                  return false
+              }
+              return tableView.frame.height > 0
           }
     }
 
