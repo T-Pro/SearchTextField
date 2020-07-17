@@ -24,14 +24,11 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
     open var interactedWith = false
 
     /// Indicate if keyboard is showing or not
-    open var keyboardIsShowing = false
+    open var keyboardPresented = false
 
-    open var tableViewIsShowing: Bool {
+    open var suggestionsPresented: Bool {
           get {
-              guard let tableView: UITableView = self.tableView else {
-                return false
-              }
-              return !tableView.isHidden || tableView.frame.height > 0.0
+              return self.tableView?.superview != nil
           }
     }
 
@@ -297,7 +294,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
             if self.direction == .down {
 
                 var tableHeight: CGFloat = 0
-                if keyboardIsShowing, let keyboardHeight = keyboardFrame?.size.height {
+                if keyboardPresented, let keyboardHeight = keyboardFrame?.size.height {
                     tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height - keyboardHeight))
                 } else {
                     tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height))
@@ -352,8 +349,8 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
 
     // Handle keyboard events
     @objc open func keyboardWillShow(_ notification: Notification) {
-        if !keyboardIsShowing && isEditing {
-            keyboardIsShowing = true
+        if !keyboardPresented && isEditing {
+            keyboardPresented = true
             keyboardFrame = ((notification as NSNotification).userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             interactedWith = true
             prepareDrawTableResult()
@@ -361,8 +358,8 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
     }
 
     @objc open func keyboardWillHide(_ notification: Notification) {
-        if keyboardIsShowing {
-            keyboardIsShowing = false
+        if keyboardPresented {
+            keyboardPresented = false
             direction = .down
             redrawSearchTableView()
         }
@@ -505,7 +502,6 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
     fileprivate func clearResults() {
         filteredResults.removeAll()
         tableView?.removeFromSuperview()
-        tableView = nil
     }
 
     // Look for Font attribute, and if it exists, adapt to the subtitle font size
