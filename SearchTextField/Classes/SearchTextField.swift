@@ -26,6 +26,15 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
     /// Indicate if keyboard is showing or not
     open var keyboardIsShowing = false
 
+    open var tableViewIsShowing: Bool {
+          get {
+              guard let tableView: UITableView = self.tableView else {
+                return false
+              }
+              return !tableView.isHidden || tableView.frame.height > 0.0
+          }
+    }
+
     /// How long to wait before deciding typing has stopped
     open var typingStoppedDelay = 0.8
 
@@ -270,7 +279,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
 
     // Re-set frames and theme colors
     fileprivate func redrawSearchTableView() {
-        
+
         if inlineMode {
             tableView?.isHidden = true
             return
@@ -496,6 +505,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
     fileprivate func clearResults() {
         filteredResults.removeAll()
         tableView?.removeFromSuperview()
+        tableView = nil
     }
 
     // Look for Font attribute, and if it exists, adapt to the subtitle font size
