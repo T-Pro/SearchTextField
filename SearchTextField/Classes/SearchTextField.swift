@@ -207,6 +207,8 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
         // Create the loading indicator
         indicator.hidesWhenStopped = true
         self.rightView = indicator
+
+        redrawSearchTableView()
     }
 
     override open func rightViewRect(forBounds bounds: CGRect) -> CGRect {
@@ -675,24 +677,24 @@ open class SearchTextFieldItem<T> {
     public var title: String
     public var subtitle: String?
     public var image: UIImage?
-    public var any: T?
+    public var value: T?
 
-    public init(title: String, subtitle: String?, image: UIImage?, _ any: T? = nil) {
+    public init(title: String, subtitle: String?, image: UIImage?, _ value: T? = nil) {
         self.title = title
         self.subtitle = subtitle
         self.image = image
-        self.any = any
+        self.value = value
     }
 
-    public init(title: String, subtitle: String?, _ any: T? = nil) {
+    public init(title: String, subtitle: String?, _ value: T? = nil) {
         self.title = title
         self.subtitle = subtitle
-        self.any = any
+        self.value = value
     }
 
-    public init(title: String, _ any: T? = nil) {
+    public init(title: String, _ value: T? = nil) {
         self.title = title
-        self.any = any
+        self.value = value
     }
 }
 
