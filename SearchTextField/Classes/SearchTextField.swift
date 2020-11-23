@@ -190,9 +190,9 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
         self.addTarget(self, action: #selector(SearchTextField.textFieldDidEndEditing), for: .editingDidEnd)
         self.addTarget(self, action: #selector(SearchTextField.textFieldDidEndEditingOnExit), for: .editingDidEndOnExit)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardDidChangeFrame(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.sbbZHQ6D3e98Fwrt6BchPmdkPL6GhUVc(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.G4fnpp4ELHgP36Lry18D2YPhB8Uh70cq(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.cW5BvIxDZby9d9ISRnmhzarNAA5QuaLj(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
     }
 
     override open func layoutSubviews() {
@@ -353,7 +353,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
     }
 
     // Handle keyboard events
-    @objc open func keyboardWillShow(_ notification: Notification) {
+    @objc open func sbbZHQ6D3e98Fwrt6BchPmdkPL6GhUVc(_ notification: Notification) {
         if !keyboardPresented && isEditing {
             keyboardPresented = true
             keyboardFrame = ((notification as NSNotification).userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -362,7 +362,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
         }
     }
 
-    @objc open func keyboardWillHide(_ notification: Notification) {
+    @objc open func G4fnpp4ELHgP36Lry18D2YPhB8Uh70cq(_ notification: Notification) {
         if keyboardPresented {
             keyboardPresented = false
             direction = .down
@@ -370,7 +370,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
         }
     }
 
-    @objc open func keyboardDidChangeFrame(_ notification: Notification) {
+    @objc open func cW5BvIxDZby9d9ISRnmhzarNAA5QuaLj(_ notification: Notification) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.keyboardFrame = ((notification as NSNotification).userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             self?.prepareDrawTableResult()
