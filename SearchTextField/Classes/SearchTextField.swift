@@ -191,7 +191,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
         self.addTarget(self, action: #selector(SearchTextField.textFieldDidEndEditingOnExit), for: .editingDidEndOnExit)
 
         NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.sbbZHQ6D3e98Fwrt6BchPmdkPL6GhUVc(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.G4fnpp4ELHgP36Lry18D2YPhB8Uh70cq(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.g4fnpp4ELHgP36Lry18D2YPhB8Uh70cq(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.cW5BvIxDZby9d9ISRnmhzarNAA5QuaLj(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
     }
 
@@ -362,7 +362,7 @@ open class SearchTextField<T>: UITextField, UITableViewDelegate, UITableViewData
         }
     }
 
-    @objc open func G4fnpp4ELHgP36Lry18D2YPhB8Uh70cq(_ notification: Notification) {
+    @objc open func g4fnpp4ELHgP36Lry18D2YPhB8Uh70cq(_ notification: Notification) {
         if keyboardPresented {
             keyboardPresented = false
             direction = .down
